@@ -1,0 +1,9 @@
+{% extends "articles/base.html" %}
+{% block content%}
+    <button>Create article</button>
+    <ul>
+        {% for x in objects %}
+            <li>{{ x.title }} ----> {{ x.description }}</li>
+        {% endfor %}
+    </ul>
+{% endblock content%}

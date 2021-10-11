@@ -12,3 +12,8 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.first_name
+
+class Articles(models.Model):
+    title = models.CharField('Title', max_length=255, blank=True, null=True)
+    description = models.TextField()
+

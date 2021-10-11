@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Contact
+from .models import Contact, Articles
 from .forms import ContactForm
 from django.views.generic import ListView, DetailView
 
@@ -39,3 +39,21 @@ def delete(request, pk, template_name='crudapp/confirm_delete.html'):
         contact.delete()
         return redirect('index')
     return render(request, template_name, {'object':contact})
+
+def blog(request):
+    obj_list = Articles.objects.all()
+    print(obj_list)
+    return render(request, 'articles/blog.html', {'objects': obj_list})
+
+def create_article(request):
+    if(request.method == 'POST'):
+        title = request.POST.get('title', False)
+        description = request.POST.get('description', False)
+        # Articles.objects.create(title=title, description=description)
+        obj = Articles(title=title, description=description)
+        obj.save()
+        print(request.POST)
+    else:
+        return render(request, 'articles/create_article.html')
+
+    return redirect('create_article')
